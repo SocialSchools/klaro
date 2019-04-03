@@ -1,5 +1,6 @@
 import React from 'react';
 import ConsentModal from './consent-modal';
+import Apps from './apps';
 import { getPurposes } from 'utils/config';
 
 export default class ConsentNotice extends React.Component {
@@ -89,6 +90,12 @@ export default class ConsentNotice extends React.Component {
 						</a>
 					</p>
 					{changesText}
+					<Apps
+						t={t}
+						config={config}
+						manager={manager}
+						text={false}
+					/>
 					<div className="cn-ok">
 						<button
 							className="btn btn-default"
