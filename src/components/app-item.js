@@ -34,4 +34,11 @@ export default class AppItem extends React.Component {
         </div>
     }
 
-}
+}				{this.props.text == true && (
+					<div id={`${id}-description`}>
+						<p className="cm-app-description">
+							{description || t([name, 'description'])}
+						</p>
+						{purposesContent}
+					</div>
+				)}
