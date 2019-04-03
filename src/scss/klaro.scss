@@ -233,6 +233,10 @@ $socs-green: #27b646;
 		right: 0;
 		z-index: 2000;
 
+		input {
+			margin-right: 5px;
+		}
+
 		@media (min-width: 990px) {
 			box-shadow: $box-shadow;
 			border-radius: $border-radius;
