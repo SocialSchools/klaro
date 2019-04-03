@@ -83,4 +83,5 @@ export default class Apps extends React.Component {
         </ul>
 
     }
+						text={this.props.text}
 }

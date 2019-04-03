@@ -54,4 +54,5 @@ export default class ConsentModal extends React.Component {
       </div>
     );
   }
+							text={true}
 }
