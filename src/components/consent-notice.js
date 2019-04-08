@@ -85,9 +85,6 @@ export default class ConsentNotice extends React.Component {
 						{t(['consentNotice', 'description'], {
 							purposes: <strong>{purposesText}</strong>
 						})}
-						<a href="#" onClick={showModal}>
-							{t(['consentNotice', 'settings'])}...
-						</a>
 					</p>
 					{changesText}
 					<Apps
@@ -96,6 +93,9 @@ export default class ConsentNotice extends React.Component {
 						manager={manager}
 						text={false}
 					/>
+						<a href="#" onClick={showModal}>
+							{t(['consentNotice', 'settings'])}
+						</a>
 					<div className="cn-ok">
 						<button
 							className="btn btn-default"
