@@ -17,6 +17,7 @@ consentNotice:
 ok: OK
 save: Save
 decline: Decline
+apply: Apply
 close: Close
 app:
     disableAll:
