@@ -9,10 +9,11 @@ consentModal:
 consentNotice:
     title: Deze website gebruikt cookies.
     changeDescription: Er waren wijzigingen sinds uw laatste bezoek, werk uw voorkeuren bij.
+    chooseTitle: Kies welke cookies u wilt accepteren
     description: >
         Om u een prettige ervaring op onze website te bieden maakt onze website gebruik van cookies.
     learnMore: Lees meer
-    settings: instellingen
+    settings: Meer informatie
 ok: OK
 save: Opslaan
 decline: Afwijzen

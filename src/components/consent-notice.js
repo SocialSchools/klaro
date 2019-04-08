@@ -87,15 +87,20 @@ export default class ConsentNotice extends React.Component {
 						})}
 					</p>
 					{changesText}
-					<Apps
-						t={t}
-						config={config}
-						manager={manager}
-						text={false}
-					/>
+					<div className="cn-apps">
+						<span className="nc-choose">
+							{t(['consentNotice', 'chooseTitle'])}
+						</span>
+						<Apps
+							t={t}
+							config={config}
+							manager={manager}
+							text={false}
+						/>
 						<a href="#" onClick={showModal}>
 							{t(['consentNotice', 'settings'])}
 						</a>
+					</div>
 					<div className="cn-ok">
 						<button
 							className="btn btn-default"
