@@ -9,6 +9,7 @@ consentModal:
 consentNotice:
     title: This website uses cookies.
     changeDescription: There were changes since your last visit, please update your consent.
+    chooseTitle: Choose which cookies you want to accept
     description: >
         To give you the best possible experience this site uses cookies.
     learnMore: Learn more
@@ -16,6 +17,7 @@ consentNotice:
 ok: OK
 save: Save
 decline: Decline
+apply: Apply
 close: Close
 app:
     disableAll:

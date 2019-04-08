@@ -180,19 +180,23 @@ $socs-green: #27b646;
 				ul.cm-apps {
 					padding: 0;
 					margin: 0;
+
 					li.cm-app {
 						&:first-child {
 							margin-top: 0;
 						}
+
 						position: relative;
 						line-height: 20px;
 						vertical-align: middle;
 						padding-left: 60px;
 						min-height: 40px;
+
 						.switch {
 							position: absolute;
 							left: 0;
 						}
+
 						p {
 							margin-top: 0;
 						}
@@ -235,6 +239,10 @@ $socs-green: #27b646;
 
 		input {
 			margin-right: 5px;
+		}
+
+		li {
+			margin-top: 0;
 		}
 
 		@media (min-width: 990px) {
@@ -296,6 +304,18 @@ $socs-green: #27b646;
 			}
 
 			a.cn-decline {
+			}
+
+			.cn-apps {
+				.nc-choose {
+					font-weight: bold;
+					color: $font-color-dark;
+				}
+
+				ul.cm-apps {
+					margin-top: 0;
+					margin-bottom: 0.5rem;
+				}
 			}
 		}
 	}
