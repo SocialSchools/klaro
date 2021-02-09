@@ -103,6 +103,7 @@ export default class ConsentManager {
 
   loadConsents() {
     const consentCookie = getCookie(this.cookieName);
+
     if (consentCookie !== null) {
       this.consents = JSON.parse(consentCookie.value);
       this._checkConsents();
@@ -138,6 +139,24 @@ export default class ConsentManager {
       if (app.callback !== undefined) app.callback(consent, app);
       this.states[app.name] = consent;
     }
+  }
+
+  createOverlay(dataSet) {
+    const { purpose, name } = dataSet;
+    const lang = this.config.lang;
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('cookie_notice');
+
+    const notice =
+      lang === 'nl'
+        ? `Om deze ${purpose} te zien moet je toestemming geven voor ${name} cookies`
+        : `To view this ${purpose} you need to accept the ${name} cookies`;
+
+    const buttonText =
+      lang === 'nl' ? `Wijzig cookie voorkeuren` : `Change cookie settings`;
+    const wrapperInner = `<p>${notice}</p> <button onclick="klaro.show()">${buttonText}</button>`;
+    wrapper.innerHTML = wrapperInner;
+    return wrapper;
   }
 
   updateAppElements(app, consent) {
@@ -198,12 +217,21 @@ export default class ConsentManager {
           if (dataset.title !== undefined) element.title = dataset.title;
           if (dataset.originalDisplay !== undefined)
             element.style.display = dataset.originalDisplay;
+          if (!dataset.hide) {
+            const wrapper = parent.querySelector('.cookie_notice');
+            if (wrapper) {
+              parent.removeChild(wrapper);
+            }
+          }
         } else {
           if (dataset.title !== undefined) element.removeAttribute('title');
           if (dataset.hide === 'true') {
             if (dataset.originalDisplay === undefined)
               dataset.originalDisplay = element.style.display;
             element.style.display = 'none';
+          } else {
+            const wrapper = this.createOverlay(dataset);
+            parent.insertBefore(wrapper, element);
           }
           for (var attr of attrs) {
             const attrValue = dataset[attr];
