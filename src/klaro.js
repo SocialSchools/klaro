@@ -19,80 +19,80 @@ const config = window[configName];
 const managers = {};
 
 window.addEventListener('load', function(event) {
-	initialize(event);
+  initialize(event);
 });
 
 if (module.hot) {
-	if (!noAutoLoad) renderKlaro(config);
-	module.hot.accept();
+  if (!noAutoLoad) renderKlaro(config);
+  module.hot.accept();
 }
 
 function getElementID(config) {
-	return config.elementID || 'klaro';
+  return config.elementID || 'klaro';
 }
 
 function getElement(config) {
-	const id = getElementID(config);
-	var element = document.getElementById(id);
-	if (element === null) {
-		element = document.createElement('div');
-		element.id = id;
-		document.body.appendChild(element);
-	}
-	return element;
+  const id = getElementID(config);
+  var element = document.getElementById(id);
+  if (element === null) {
+    element = document.createElement('div');
+    element.id = id;
+    document.body.appendChild(element);
+  }
+  return element;
 }
 
 function getTranslations(config) {
-	const trans = new Map([]);
-	update(trans, convertedTranslations);
-	update(trans, convertToMap(config.translations || {}));
-	return trans;
+  const trans = new Map([]);
+  update(trans, convertedTranslations);
+  update(trans, convertToMap(config.translations || {}));
+  return trans;
 }
 
 export function renderKlaro(config, show) {
-	if (config === undefined) return;
-	const element = getElement(config);
-	const trans = getTranslations(config);
-	const manager = getManager(config);
-	const lang = config.lang || language();
-	const tt = (...args) => {
-		return t(trans, lang, ...args);
-	};
-	const app = render(
-		<App
-			t={tt}
-			stylePrefix={stylePrefix}
-			manager={manager}
-			config={config}
-			show={show || false}
-		/>,
-		element
-	);
-	return app;
+  if (config === undefined) return;
+  const element = getElement(config);
+  const trans = getTranslations(config);
+  const manager = getManager(config);
+  const lang = config.lang || language();
+  const tt = (...args) => {
+    return t(trans, lang, ...args);
+  };
+  const app = render(
+    <App
+      t={tt}
+      stylePrefix={stylePrefix}
+      manager={manager}
+      config={config}
+      show={show || false}
+    />,
+    element
+  );
+  return app;
 }
 
 export function initialize(e) {
-	if (!noAutoLoad) renderKlaro(config);
-	if (originalOnLoad !== null) {
-		originalOnLoad(e);
-	}
+  if (!noAutoLoad) renderKlaro(config);
+  if (originalOnLoad !== null) {
+    originalOnLoad(e);
+  }
 }
 
 export function getManager(conf) {
-	conf = conf || config;
-	const name = getElementID(conf);
-	if (managers[name] === undefined) managers[name] = new ConsentManager(conf);
-	return managers[name];
+  conf = conf || config;
+  const name = getElementID(conf);
+  if (managers[name] === undefined) managers[name] = new ConsentManager(conf);
+  return managers[name];
 }
 
 export function show(conf) {
-	conf = conf || config;
-	renderKlaro(conf, true);
-	return false;
+  conf = conf || config;
+  renderKlaro(conf, true);
+  return false;
 }
 
 export function version() {
-	return VERSION;
+  return VERSION;
 }
 
 export { language };
