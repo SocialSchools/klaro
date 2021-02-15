@@ -3,10 +3,9 @@ var path = require('path');
 
 var BUILD_DIR = path.resolve(__dirname, 'dist');
 var PUBLIC_DIR = path.resolve(BUILD_DIR, 'public');
-var SRC_DIR = path.resolve(__dirname,'src');
+var SRC_DIR = path.resolve(__dirname, 'src');
 var APP_ENV = process.env.APP_ENV || 'dev';
 var APP_DEV_MODE = APP_ENV === 'dev' && process.env.APP_DEV_MODE;
-
 
 var config = {
   target: 'web',
@@ -14,13 +13,10 @@ var config = {
   resolve: {
     symlinks: false,
     extensions: ['.js', '.jsx'],
-    modules: [
-      SRC_DIR,
-      "node_modules"
-    ],
+    modules: [SRC_DIR, 'node_modules'],
     alias: {
-      "react": "preact-compat",
-      "react-dom": "preact-compat"
+      react: 'preact-compat',
+      'react-dom': 'preact-compat'
     }
   },
   module: {
@@ -31,7 +27,11 @@ var config = {
       },
       {
         test: /\.scss|sass$/,
-        loaders: ['style-loader', withEnvSourcemap('css-loader'), withEnvSourcemap('sass-loader')]
+        loaders: [
+          'style-loader',
+          withEnvSourcemap('css-loader'),
+          withEnvSourcemap('sass-loader')
+        ]
       },
       {
         test: /\.css$/,
@@ -39,22 +39,20 @@ var config = {
       },
       {
         test: /\.yaml|yml$/,
-        loaders: ['json-loader', 'yaml-loader'],
+        loaders: ['json-loader', 'yaml-loader']
       },
       {
         test: /\.jsx?/,
         include: [SRC_DIR],
         loader: 'babel-loader',
         query: {
-          plugins: ["transform-runtime"],
-          presets: [["env", { "modules": false }], 'react', 'stage-2'],
+          plugins: ['transform-runtime'],
+          presets: [['env', { modules: false }], 'react', 'stage-2']
         }
       }
     ]
   },
-  entry: [
-    SRC_DIR + '/klaro.js'
-  ],
+  entry: [SRC_DIR + '/klaro.js'],
   output: {
     path: BUILD_DIR,
     filename: 'klaro.js',
@@ -69,16 +67,13 @@ if (APP_ENV === 'dev') {
   config.devtool = 'inline-source-maps';
   config.plugins.push(
     new webpack.DefinePlugin({
-      VERSION : JSON.stringify('development'),
+      VERSION: JSON.stringify('development')
     })
   );
 }
 
 if (APP_DEV_MODE === 'server') {
-  config.entry = [
-    'webpack/hot/only-dev-server',
-    config.entry[0]
-  ];
+  config.entry = ['webpack/hot/only-dev-server', config.entry[0]];
   config.devServer = {
     hot: true,
     // enable HMR on the server
@@ -108,11 +103,16 @@ if (APP_ENV === 'production') {
   config.plugins.push(
     new webpack.LoaderOptionsPlugin({
       minimize: true,
-      debug: false,
+      debug: false
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"',
-      VERSION : JSON.stringify(process.env.CI_APP_VERSION || process.env.APP_VERSION || process.env.APP_COMMIT || 'unknown'),
+      VERSION: JSON.stringify(
+        process.env.CI_APP_VERSION ||
+          process.env.APP_VERSION ||
+          process.env.APP_COMMIT ||
+          'unknown'
+      )
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
@@ -121,7 +121,7 @@ if (APP_ENV === 'production') {
       },
       comments: false,
       minimize: true,
-      sourceMaps: false,
+      sourceMaps: false
     }),
     new webpack.optimize.AggressiveMergingPlugin()
   );
